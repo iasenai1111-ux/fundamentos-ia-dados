@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fundamentos de IA e Análise de Dados</title>
+<style>
+  :root { --azul:#0047B6; --azul-claro:#E3ECFA; --laranja:#F28E2B; --texto:#1F2937; --suave:#6B7280; --fundo:#F4F6FA; --borda:#D5DBE6; --verde:#1E7B34; --verde-bg:#E6F4E7; --roxo:#6A3FB5; --roxo-bg:#EFE8FA; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:"Segoe UI", Roboto, Arial, sans-serif; background:var(--fundo); color:var(--texto); }
+  header { display:flex; }
+  header .t { flex:1; background:var(--azul); color:#fff; padding:22px 24px; }
+  header h1 { margin:0; font-size:26px; }
+  header p { margin:4px 0 0; opacity:.9; font-size:14px; }
+  header .s { background:var(--laranja); color:#fff; font-weight:800; padding:22px 24px; display:flex; align-items:center; font-size:20px; }
+  main { max-width:1000px; margin:0 auto; padding:18px 16px 40px; }
+  .intro { background:#fff; border:1px solid var(--borda); border-radius:12px; padding:16px 18px; font-size:15px; line-height:1.5; }
+  h2 { color:var(--azul); font-size:20px; margin:28px 0 10px; display:flex; align-items:center; gap:10px; }
+  h2 .tag { font-size:12px; background:var(--azul-claro); color:var(--azul); padding:3px 8px; border-radius:20px; font-weight:700; }
+  .desc { color:var(--suave); font-size:14px; margin:-4px 0 12px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:12px; }
+  a.item { display:flex; gap:12px; align-items:flex-start; background:#fff; border:1px solid var(--borda); border-radius:12px; padding:14px; text-decoration:none; color:var(--texto); transition:border-color .15s, transform .15s; }
+  a.item:hover { border-color:var(--azul); transform:translateY(-1px); }
+  .ic { flex:none; width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px; background:var(--azul-claro); }
+  .item b { display:block; font-size:15px; }
+  .item span { display:block; font-size:13px; color:var(--suave); margin-top:2px; }
+  .destaque { border:2px solid var(--verde) !important; background:var(--verde-bg) !important; }
+  .destaque .ic { background:#fff; }
+  .nota { margin-top:28px; background:var(--roxo-bg); color:var(--roxo); border-radius:10px; padding:12px 14px; font-size:14px; }
+  footer { text-align:center; color:var(--suave); font-size:12px; padding:0 16px 30px; }
+  @media (max-width:600px) { header { flex-direction:column; } header .s { padding:8px 24px; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="t"><h1>Fundamentos de IA e Análise de Dados</h1><p>Escola SENAI "Orlando Laviero Ferraiuolo" · Prof. Rafael Pereira · 40 horas</p></div>
+  <div class="s">SENAI</div>
+</header>
+<main>
+  <div class="intro">Aqui ficam os materiais das aulas. Para cada aula: a <b>folha da atividade</b> (passo a passo), o <b>caderno do Colab</b> e as <b>imagens</b> para o Teachable Machine. Os cadernos abrem direto no Google Colab: depois de abrir, use <b>Arquivo › Salvar uma cópia no Drive</b>.</div>
+
+  <h2>Aula 01 <span class="tag">Qual IA está por trás disso?</span></h2>
+  <p class="desc">Tipos de IA, como a máquina aprende, treinar uma IA de inspeção de peças e IA generativa.</p>
+  <div class="grid">
+    <a class="item" href="aula01/SA_Aula01_Qual_IA_esta_por_tras.docx"><div class="ic">📄</div><div><b>Folha da atividade</b><span>Passo a passo das 4 missões</span></div></a>
+    <a class="item" href="https://colab.research.google.com/github/iasenai1111-ux/fundamentos-ia-dados/blob/main/aula01/Aula01_Qual_IA_esta_por_tras_ALUNO.ipynb" target="_blank" rel="noopener"><div class="ic">📓</div><div><b>Caderno no Colab</b><span>Registro com correção automática</span></div></a>
+    <a class="item" href="aula01/Aula01_pecas_teachable_machine.zip"><div class="ic">🔩</div><div><b>Imagens das peças</b><span>Zip para o Teachable Machine (OK × Defeito)</span></div></a>
+  </div>
+
+  <h2>Aula 1.1 <span class="tag">A IA por dentro</span></h2>
+  <p class="desc">Rede neural no Quick, Draw!, consertar a IA que errou, alucinação da IA generativa e o modelo virando sistema.</p>
+  <div class="grid">
+    <a class="item destaque" href="aula01-1/portaria/"><div class="ic">🚧</div><div><b>Portaria Smart Canteiro</b><span>Use o seu modelo do Teachable Machine com a webcam</span></div></a>
+    <a class="item" href="aula01-1/SA_Aula01_1_IA_por_dentro.docx"><div class="ic">📄</div><div><b>Folha da atividade</b><span>Recuperação + aprofundamento</span></div></a>
+    <a class="item" href="https://colab.research.google.com/github/iasenai1111-ux/fundamentos-ia-dados/blob/main/aula01-1/Aula01_1_IA_por_dentro_ALUNO.ipynb" target="_blank" rel="noopener"><div class="ic">📓</div><div><b>Caderno no Colab</b><span>Registro com correção automática</span></div></a>
+    <a class="item" href="aula01-1/Aula01_1_pecas_reforco.zip"><div class="ic">🔩</div><div><b>Imagens de reforço</b><span>Peças com sombra, defeitos sutis e teste difícil</span></div></a>
+    <a class="item" href="aula01-1/Resumo_Do_Teachable_Machine_ao_projeto_real.docx"><div class="ic">🧭</div><div><b>Resumo: do Teachable Machine ao projeto real</b><span>Conceitos, onde aplicar e cuidados</span></div></a>
+  </div>
+
+  <h2>Planos B <span class="tag">exercícios extras</span></h2>
+  <p class="desc">Para quando sobrar tempo, para o próximo encontro ou para treinar em casa.</p>
+  <div class="grid">
+    <a class="item" href="planos-b/smart-canteiro/SA_PlanoB_Smart_Canteiro.docx"><div class="ic">👷</div><div><b>Smart Canteiro</b><span>IA que libera a entrada só com capacete e crachá + Smart Sampa</span></div></a>
+    <a class="item" href="planos-b/smart-canteiro/Smart_Canteiro_imagens.zip"><div class="ic">🖼️</div><div><b>Imagens do Smart Canteiro</b><span>Liberado, Bloqueado, Ninguém e as pegadinhas</span></div></a>
+    <a class="item" href="planos-b/extras/SA_PlanoB_Inspecao_com_IA.docx"><div class="ic">📊</div><div><b>Inspeção na planilha com IA</b><span>Folha da atividade (Google Planilhas)</span></div></a>
+    <a class="item" href="planos-b/extras/PlanoB_Inspecao_com_IA_ALUNO.xlsx"><div class="ic">📗</div><div><b>Planilha da inspeção</b><span>Abra no Google Planilhas</span></div></a>
+    <a class="item" href="planos-b/extras/SA_PlanoB_TensorFlow_Playground.docx"><div class="ic">🧠</div><div><b>TensorFlow Playground</b><span>Desafio avançado: a rede neural por dentro</span></div></a>
+  </div>
+
+  <h2>Próximas aulas <span class="tag">prévia</span></h2>
+  <div class="grid">
+    <a class="item" href="https://colab.research.google.com/github/iasenai1111-ux/fundamentos-ia-dados/blob/main/proximas-aulas/Exercicio_02_Alcool_ou_Gasolina_ALUNO.ipynb" target="_blank" rel="noopener"><div class="ic">⛽</div><div><b>Python: Álcool ou gasolina?</b><span>Variáveis, if e for com um problema do dia a dia</span></div></a>
+  </div>
+
+  <div class="nota"><b>Regra de ouro do curso:</b> a IA avisa, o humano confere. Dado pessoal ou da empresa não vai para a IA.</div>
+</main>
+<footer>SENAI · Formação Profissional · Fundamentos de IA e Análise de Dados</footer>
+</body>
+</html>

@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portaria Smart Canteiro</title>
+<style>
+  :root {
+    --azul: #0047B6; --azul-claro: #E3ECFA; --laranja: #F28E2B; --texto: #1F2937; --suave: #6B7280;
+    --fundo: #F4F6FA; --cartao: #FFFFFF; --borda: #D5DBE6;
+    --verde: #1E7B34; --verde-bg: #E6F4E7; --vermelho: #C8102E; --vermelho-bg: #FDECEE;
+    --ambar: #B45309; --ambar-bg: #FFF4E0; --cinza-bg: #EEF0F4;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Segoe UI", Roboto, Arial, sans-serif; background: var(--fundo); color: var(--texto); }
+  header { display: flex; align-items: stretch; }
+  header .t { flex: 1; background: var(--azul); color: #fff; padding: 14px 20px; }
+  header .t h1 { margin: 0; font-size: 22px; }
+  header .t p { margin: 2px 0 0; font-size: 13px; opacity: .9; }
+  header .s { background: var(--laranja); color: #fff; padding: 14px 20px; font-weight: 700; display: flex; align-items: center; }
+  main { max-width: 1100px; margin: 0 auto; padding: 16px; display: grid; gap: 16px; grid-template-columns: 1fr 1fr; }
+  @media (max-width: 860px) { main { grid-template-columns: 1fr; } }
+  .card { background: var(--cartao); border: 1px solid var(--borda); border-radius: 12px; padding: 16px; }
+  .card h2 { margin: 0 0 10px; font-size: 16px; color: var(--azul); }
+  .full { grid-column: 1 / -1; }
+  label { font-size: 13px; font-weight: 600; display: block; margin-bottom: 4px; }
+  input[type=text] { width: 100%; padding: 10px; border: 1px solid var(--borda); border-radius: 8px; font-size: 14px; }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
+  button { background: var(--azul); color: #fff; border: 0; border-radius: 8px; padding: 10px 16px; font-size: 14px; font-weight: 600; cursor: pointer; }
+  button.sec { background: var(--azul-claro); color: var(--azul); }
+  button:disabled { opacity: .5; cursor: not-allowed; }
+  .ajuda { font-size: 12px; color: var(--suave); margin-top: 6px; line-height: 1.45; }
+  .msg { font-size: 13px; margin-top: 8px; padding: 8px 10px; border-radius: 8px; display: none; }
+  .msg.ok { display: block; background: var(--verde-bg); color: var(--verde); }
+  .msg.erro { display: block; background: var(--vermelho-bg); color: var(--vermelho); }
+  .tabs { display: flex; gap: 6px; margin-bottom: 10px; }
+  .tabs button { flex: 1; }
+  .tabs button[aria-selected=false] { background: var(--cinza-bg); color: var(--texto); }
+  #area { position: relative; width: 100%; aspect-ratio: 1 / 1; background: #111827; border-radius: 10px; overflow: hidden; display: flex; align-items: center; justify-content: center; color: #9CA3AF; font-size: 14px; text-align: center; }
+  #area canvas, #area img { width: 100%; height: 100%; object-fit: contain; }
+  #drop { border: 2px dashed var(--borda); border-radius: 10px; padding: 14px; text-align: center; font-size: 13px; color: var(--suave); margin-top: 10px; cursor: pointer; display: none; }
+  #drop.ativo { display: block; }
+  #status { border-radius: 14px; padding: 22px 16px; text-align: center; background: var(--cinza-bg); transition: background .2s; }
+  #status .grande { font-size: clamp(34px, 7vw, 58px); font-weight: 800; letter-spacing: 1px; }
+  #status .sub { font-size: 15px; margin-top: 6px; }
+  #status.liberado { background: var(--verde-bg); color: var(--verde); }
+  #status.bloqueado { background: var(--vermelho-bg); color: var(--vermelho); }
+  #status.porteiro { background: var(--ambar-bg); color: var(--ambar); }
+  #status.vazio { background: var(--cinza-bg); color: var(--suave); }
+  #status.outro { background: var(--azul-claro); color: var(--azul); }
+  .barra { margin-top: 10px; }
+  .barra .nome { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; }
+  .barra .trilho { height: 14px; background: var(--cinza-bg); border-radius: 7px; overflow: hidden; margin-top: 3px; }
+  .barra .enche { height: 100%; background: var(--azul); width: 0; transition: width .15s; }
+  .regra { display: flex; align-items: center; gap: 10px; margin-top: 14px; font-size: 13px; }
+  .regra input { flex: 1; }
+  .regra b { min-width: 44px; text-align: right; }
+  ol#log { margin: 0; padding-left: 18px; font-size: 13px; max-height: 210px; overflow: auto; }
+  ol#log li { margin: 3px 0; }
+  .priv { font-size: 12px; color: var(--suave); background: var(--azul-claro); border-radius: 8px; padding: 8px 10px; margin-top: 10px; }
+  footer { text-align: center; font-size: 12px; color: var(--suave); padding: 10px 16px 24px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="t"><h1>Portaria Smart Canteiro</h1><p>A sua IA do Teachable Machine funcionando como um sistema de verdade</p></div>
+  <div class="s">SENAI</div>
+</header>
+
+<main>
+  <section class="card full">
+    <h2>1. Ligar o seu modelo</h2>
+    <label for="url">Link do modelo exportado no Teachable Machine</label>
+    <input id="url" type="text" placeholder="https://teachablemachine.withgoogle.com/models/XXXXXXX/" autocomplete="off">
+    <div class="row">
+      <button id="btnCarregar">Carregar modelo</button>
+    </div>
+    <p class="ajuda">No Teachable Machine: <b>Exportar modelo</b> › aba <b>Tensorflow.js</b> › <b>Carregar o meu modelo</b> › espere o <b>[...]</b> virar um código › copie o link e cole aqui.</p>
+    <details class="ajuda" style="margin-top:10px">
+      <summary style="cursor:pointer;color:var(--azul);font-weight:600">Deu "Failed to fetch"? Carregue o modelo pelos arquivos do computador</summary>
+      <p>No Teachable Machine: <b>Exportar modelo</b> › aba <b>Tensorflow.js</b> › marque <b>Transferir</b> › <b>Transferir o meu modelo</b>. Extraia o zip e escolha os <b>3 arquivos</b> juntos (model.json, weights.bin e metadata.json):</p>
+      <input id="arqModelo" type="file" multiple accept=".json,.bin">
+    </details>
+    <div id="msgModelo" class="msg"></div>
+  </section>
+
+  <section class="card">
+    <h2>2. Câmera da portaria</h2>
+    <div class="tabs" role="tablist">
+      <button id="tabCam" role="tab" aria-selected="true">Webcam</button>
+      <button id="tabImg" role="tab" aria-selected="false">Imagem do computador</button>
+    </div>
+    <div id="area">Carregue o modelo para começar</div>
+    <div class="row" id="camCtrl">
+      <button id="btnCam" disabled>Ligar webcam</button>
+      <button id="btnParar" class="sec" disabled>Desligar</button>
+    </div>
+    <div id="drop">Clique aqui ou arraste uma imagem (ex.: pasta <b>teste</b> do Smart Canteiro)
+      <input id="arquivo" type="file" accept="image/*" hidden>
+    </div>
+    <p class="priv">🔒 Tudo roda no seu navegador. Nenhuma imagem é enviada para a internet.</p>
+  </section>
+
+  <section class="card">
+    <h2>3. Decisão</h2>
+    <div id="status" class="vazio"><div class="grande" id="stGrande">—</div><div class="sub" id="stSub">Aguardando o modelo</div></div>
+    <div id="barras"></div>
+    <div class="regra">
+      <label for="corte" style="margin:0">Regra do humano: abaixo de</label>
+      <input id="corte" type="range" min="50" max="99" value="90">
+      <b id="corteTxt">90%</b>
+    </div>
+    <p class="ajuda">Se a certeza da IA ficar abaixo desse valor, a portaria não decide sozinha: <b>chama o porteiro</b>. É a mesma ideia do Smart Sampa, que só gera alerta acima de 92%.</p>
+  </section>
+
+  <section class="card full">
+    <h2>4. Registro da portaria</h2>
+    <ol id="log"><li style="list-style:none;margin-left:-18px;color:var(--suave)">Os eventos aparecem aqui.</li></ol>
+  </section>
+</main>
+<footer>Fundamentos de IA e Análise de Dados · SENAI "Orlando Laviero Ferraiuolo" · protótipo didático, não usar como controle de acesso real</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.5/dist/teachablemachine-image.min.js"></script>
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  let model = null, webcam = null, rodando = false, modo = "cam";
+  let estadoAtual = null, candidato = null, desde = 0;
+
+  // ---------- utilidades ----------
+  const norm = (t) => t.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+  function tipoDaClasse(nome) {
+    const n = norm(nome);
+    if (/liber|autoriz|aprov|^ok$|\bok\b/.test(n)) return "liberado";
+    if (/bloq|negad|defeit|sem epi|reprov/.test(n)) return "bloqueado";
+    if (/ningu|vazi|fundo|nada/.test(n)) return "vazio";
+    return "outro";
+  }
+  const textoTipo = { liberado: "LIBERADO", bloqueado: "BLOQUEADO", vazio: "AGUARDANDO", outro: "" };
+  function msg(el, texto, tipo) { el.textContent = texto; el.className = "msg " + tipo; }
+  function hora() { return new Date().toLocaleTimeString("pt-BR"); }
+  function salvar(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function ler(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+
+  // ---------- modelo ----------
+  async function carregar() {
+    let url = $("url").value.trim();
+    if (!url) { msg($("msgModelo"), "Cole o link do modelo primeiro.", "erro"); return; }
+    if (url.includes("[...]")) { msg($("msgModelo"), "Esse link ainda tem [...]: o modelo não foi enviado. No Teachable Machine, clique em Carregar o meu modelo e espere o [...] virar um código.", "erro"); return; }
+    if (!url.endsWith("/")) url += "/";
+    $("btnCarregar").disabled = true;
+    msg($("msgModelo"), "Carregando o modelo...", "ok");
+    try {
+      model = await tmImage.load(url + "model.json", url + "metadata.json");
+      salvar("smartCanteiroModelo", url);
+      prontoModelo("link");
+    } catch (e) {
+      model = null;
+      const det = (e && e.message ? e.message : String(e));
+      const dica = /fetch/i.test(det)
+        ? (location.protocol === "file:" ? " A página foi aberta direto do computador (file://): publique no GitHub Pages ou use a opção dos arquivos logo acima." : " A rede pode estar bloqueando o servidor do Google: use a opção dos arquivos logo acima.")
+        : " Confira se o link é o de Exportar modelo › Tensorflow.js › Carregar o meu modelo.";
+      msg($("msgModelo"), "Não consegui carregar o modelo pelo link." + dica + " (Detalhe técnico: " + det + ")", "erro");
+      console.error(e);
+    }
+    $("btnCarregar").disabled = false;
+  }
+
+  async function carregarArquivos(lista) {
+    const fs = Array.from(lista || []);
+    const acha = (re) => fs.find((f) => re.test(f.name.toLowerCase()));
+    const mj = acha(/^model.*\.json$/), wb = acha(/\.bin$/), md = acha(/^metadata.*\.json$/);
+    if (!mj || !wb || !md) { msg($("msgModelo"), "Escolha os 3 arquivos juntos: model.json, weights.bin e metadata.json (segure Ctrl para selecionar).", "erro"); return; }
+    msg($("msgModelo"), "Carregando o modelo dos arquivos...", "ok");
+    try {
+      model = await tmImage.loadFromFiles(mj, wb, md);
+      prontoModelo("arquivos do computador");
+    } catch (e) {
+      model = null;
+      msg($("msgModelo"), "Não consegui abrir os arquivos. Confira se são os 3 do zip do Teachable Machine. (Detalhe técnico: " + (e && e.message ? e.message : e) + ")", "erro");
+    }
+  }
+
+  function prontoModelo(origem) {
+    const nomes = model.getClassLabels();
+    msg($("msgModelo"), "Modelo carregado (" + origem + "): " + nomes.length + " classes (" + nomes.join(", ") + ").", "ok");
+    montarBarras(nomes);
+    $("btnCam").disabled = false;
+    $("area").textContent = modo === "cam" ? "Clique em Ligar webcam" : "Escolha uma imagem abaixo";
+    registrar("Modelo carregado com as classes: " + nomes.join(", "));
+  }
+
+  function montarBarras(nomes) {
+    $("barras").innerHTML = nomes.map((n, i) =>
+      `<div class="barra"><div class="nome"><span>${n.replace(/</g, "&lt;")}</span><span id="pc${i}">0%</span></div>` +
+      `<div class="trilho"><div class="enche" id="bar${i}"></div></div></div>`).join("");
+  }
+
+  // ---------- decisão ----------
+  async function analisar(fonte) {
+    if (!model) return;
+    const pred = await model.predict(fonte);
+    let melhor = pred[0];
+    pred.forEach((p, i) => {
+      if (p.probability > melhor.probability) melhor = p;
+      const pc = Math.round(p.probability * 100);
+      const bar = $("bar" + i); if (bar) bar.style.width = pc + "%";
+      const t = $("pc" + i); if (t) t.textContent = pc + "%";
+    });
+    const corte = Number($("corte").value) / 100;
+    const tipo = tipoDaClasse(melhor.className);
+    let estado, sub;
+    if (tipo === "vazio") { estado = "vazio"; sub = "Ninguém na frente da câmera"; }
+    else if (melhor.probability < corte) { estado = "porteiro"; sub = `Dúvida: ${melhor.className} com ${Math.round(melhor.probability * 100)}%. Um humano precisa conferir.`; }
+    else { estado = tipo; sub = `${melhor.className} com ${Math.round(melhor.probability * 100)}% de certeza`; }
+    const grande = estado === "porteiro" ? "CHAMAR PORTEIRO" : (tipo === "outro" ? melhor.className.toUpperCase() : textoTipo[estado]);
+    return { estado, grande, sub };
+  }
+
+  function mostrar(r, imediato) {
+    // na webcam, só troca a decisão depois de 0,8 s estável (evita piscar)
+    const chave = r.estado + "|" + r.grande;
+    const agora = performance.now();
+    if (!imediato) {
+      if (chave !== candidato) { candidato = chave; desde = agora; }
+      if (agora - desde < 800) { $("stSub").textContent = r.sub; return; }
+    }
+    $("status").className = r.estado;
+    $("stGrande").textContent = r.grande;
+    $("stSub").textContent = r.sub;
+    if (chave !== estadoAtual) {
+      estadoAtual = chave;
+      if (r.estado !== "vazio" || imediato) registrar(r.grande + " · " + r.sub);
+    }
+  }
+
+  function registrar(texto) {
+    const log = $("log");
+    if (log.firstElementChild && log.firstElementChild.style.listStyle === "none") log.innerHTML = "";
+    const li = document.createElement("li");
+    li.textContent = hora() + " — " + texto;
+    log.prepend(li);
+    while (log.children.length > 40) log.lastChild.remove();
+  }
+
+  // ---------- webcam ----------
+  async function ligarCam() {
+    if (!model) return;
+    $("btnCam").disabled = true;
+    try {
+      webcam = new tmImage.Webcam(400, 400, true);
+      await webcam.setup();
+      await webcam.play();
+      $("area").innerHTML = ""; $("area").appendChild(webcam.canvas);
+      rodando = true; $("btnParar").disabled = false;
+      registrar("Webcam ligada");
+      loop();
+    } catch (e) {
+      $("area").textContent = "Não consegui ligar a webcam. Permita a câmera no cadeado ao lado do endereço, ou use a aba Imagem do computador.";
+      $("btnCam").disabled = false;
+    }
+  }
+  async function loop() {
+    if (!rodando) return;
+    webcam.update();
+    const r = await analisar(webcam.canvas);
+    if (r) mostrar(r, false);
+    requestAnimationFrame(loop);
+  }
+  function pararCam() {
+    rodando = false;
+    if (webcam) { webcam.stop(); webcam = null; }
+    $("area").textContent = "Webcam desligada";
+    $("btnParar").disabled = true; $("btnCam").disabled = !model;
+    registrar("Webcam desligada");
+  }
+
+  // ---------- imagem ----------
+  function usarArquivo(file) {
+    if (!file || !model) return;
+    const img = new Image();
+    img.onload = async () => {
+      $("area").innerHTML = ""; $("area").appendChild(img);
+      const r = await analisar(img);
+      if (r) { estadoAtual = null; mostrar(r, true); }
+    };
+    img.src = URL.createObjectURL(file);
+  }
+
+  function trocarModo(m) {
+    modo = m;
+    $("tabCam").setAttribute("aria-selected", m === "cam");
+    $("tabImg").setAttribute("aria-selected", m === "img");
+    $("camCtrl").style.display = m === "cam" ? "flex" : "none";
+    $("drop").classList.toggle("ativo", m === "img");
+    if (m === "img" && rodando) pararCam();
+    $("area").textContent = !model ? "Carregue o modelo para começar" : (m === "cam" ? "Clique em Ligar webcam" : "Escolha uma imagem abaixo");
+  }
+
+  // ---------- eventos ----------
+  $("btnCarregar").onclick = carregar;
+  $("arqModelo").onchange = (e) => carregarArquivos(e.target.files);
+  $("url").addEventListener("keydown", (e) => { if (e.key === "Enter") carregar(); });
+  $("btnCam").onclick = ligarCam;
+  $("btnParar").onclick = pararCam;
+  $("tabCam").onclick = () => trocarModo("cam");
+  $("tabImg").onclick = () => trocarModo("img");
+  $("drop").onclick = () => $("arquivo").click();
+  $("arquivo").onchange = (e) => usarArquivo(e.target.files[0]);
+  ["dragover", "dragenter"].forEach((ev) => $("drop").addEventListener(ev, (e) => { e.preventDefault(); }));
+  $("drop").addEventListener("drop", (e) => { e.preventDefault(); usarArquivo(e.dataTransfer.files[0]); });
+  $("corte").oninput = () => { $("corteTxt").textContent = $("corte").value + "%"; };
+
+  // link do modelo pela URL (?modelo=...) ou lembrado do último uso
+  // modelo de exemplo do professor: carrega sozinho se o aluno ainda não colou o dele
+  const MODELO_PADRAO = "https://teachablemachine.withgoogle.com/models/b_Skv6_nW/";
+  const daUrl = new URLSearchParams(location.search).get("modelo");
+  const inicial = daUrl || ler("smartCanteiroModelo") || MODELO_PADRAO;
+  $("url").value = inicial;
+  carregar();
+})();
+</script>
+</body>
+</html>
