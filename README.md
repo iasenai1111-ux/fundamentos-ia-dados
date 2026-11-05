@@ -10,11 +10,10 @@ Docente: Rafael Pereira.
 | Pasta | O que tem |
 |---|---|
 | `aula01/` | Aula 01 — Qual IA está por trás disso? Folha da atividade (PDF), caderno do Colab e imagens das peças |
-| `aula01-1/` | Aula 1.1 — A IA por dentro. Folha, caderno, imagens de reforço, resumo e a **Portaria Smart Canteiro** |
-| `aula01-1/portaria/` | Página que usa o modelo do Teachable Machine com a webcam |
-| `planos-b/` | Exercícios extras: Smart Canteiro, inspeção na planilha com IA e TensorFlow Playground |
+| `aula01-1/` | Aula 1.1 — Smart Canteiro. Folha da atividade (PDF), imagens de capacete e crachá e o resumo |
+| `aula01-1/portaria/` | Portaria Smart Canteiro: usa o modelo do Teachable Machine com a webcam |
 
-## Como abrir os cadernos no Colab
+## Como abrir o caderno no Colab
 
 Pela página do curso, clique em **Caderno no Colab**. Depois: **Arquivo › Salvar uma cópia no Drive**.
 
