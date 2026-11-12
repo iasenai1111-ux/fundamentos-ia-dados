@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portal do Colaborador · Construtora Vila Nova</title>
+<style>
+  :root{--azul:#0B4FA8;--azul-esc:#08397a;--laranja:#F28C28;--tinta:#1F2A44;--cinza:#5B6B8C;--fundo:#F4F6FA;--borda:#D8DEEA}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--fundo);color:var(--tinta)}
+  header{background:var(--azul);color:#fff;padding:14px 24px;display:flex;align-items:center;gap:14px}
+  .logo{width:40px;height:40px;border-radius:8px;background:var(--laranja);display:grid;place-items:center;font-weight:800;font-size:18px}
+  header b{font-size:18px} header small{display:block;opacity:.85;font-size:13px}
+  main{max-width:760px;margin:28px auto;padding:0 16px}
+  .card{background:#fff;border:1px solid var(--borda);border-radius:12px;padding:24px;box-shadow:0 2px 6px rgba(0,0,0,.04)}
+  h1{font-size:22px;margin:0 0 6px} p.sub{color:var(--cinza);margin:0 0 20px}
+  label{font-weight:600;display:block;margin:14px 0 6px}
+  input[type=text]{width:100%;padding:10px 12px;border:1px solid var(--borda);border-radius:8px;font-size:15px}
+  .termo{height:220px;overflow:auto;border:1px solid var(--borda);border-radius:8px;padding:14px 16px;font-size:13px;line-height:1.5;background:#FBFCFE}
+  .termo h3{font-size:13px;margin:0 0 8px} .termo ol{padding-left:18px;margin:0}
+  .aceite{display:flex;gap:10px;align-items:flex-start;margin:16px 0;font-size:14px}
+  .aceite input{margin-top:3px;width:18px;height:18px}
+  button{background:var(--azul);color:#fff;border:0;border-radius:8px;padding:12px 20px;font-size:15px;font-weight:600;cursor:pointer}
+  button:disabled{background:#AEB9CC;cursor:not-allowed}
+  button:not(:disabled):hover{background:var(--azul-esc)}
+  .comprovante{display:none;margin-top:20px;border:1px solid #BFD6F6;background:#EEF4FD;border-radius:10px;padding:16px}
+  .comprovante b{color:var(--azul)} .comprovante a{color:var(--azul);font-weight:700}
+  footer{text-align:center;color:var(--cinza);font-size:12px;margin:24px 0}
+</style>
+</head>
+<body>
+<header><div class="logo">VN</div><div><b>Construtora Vila Nova</b><small>Portal do Colaborador · RH</small></div></header>
+<main>
+  <div class="card">
+    <h1>Acesso a arquivos do RH</h1>
+    <p class="sub">Arquivo solicitado: <b>dados_ponto_outubro.xlsx</b> (ponto de outubro)</p>
+
+    <label for="nome">Nome completo</label>
+    <input id="nome" type="text" placeholder="Digite seu nome" autocomplete="off">
+
+    <label>Termo de Uso dos Sistemas e de Confidencialidade</label>
+    <div class="termo" tabindex="0">
+      <h3>TERMO DE USO DOS SISTEMAS E DE CONFIDENCIALIDADE — CONSTRUTORA VILA NOVA</h3>
+      <p>Ao acessar os sistemas e arquivos da Construtora Vila Nova, o(a) colaborador(a) declara que:</p>
+      <ol>
+        <li>Utilizará os recursos de tecnologia exclusivamente para atividades profissionais.</li>
+        <li>Manterá sigilo sobre informações internas, comerciais, financeiras e de pessoas, durante e após o vínculo com a empresa.</li>
+        <li>Tratará dados pessoais de colaboradores, clientes e fornecedores conforme a Lei nº 13.709/2018 (LGPD), usando-os apenas para a finalidade autorizada.</li>
+        <li>Não compartilhará arquivos da empresa por aplicativos de mensagem pessoais, e-mail pessoal, pen drive ou armazenamento em nuvem pessoal.</li>
+        <li>Não salvará arquivos da empresa em dispositivos pessoais (celular, notebook particular).</li>
+        <li><b>É proibido inserir dados pessoais (nome, CPF, salário, matrícula) ou dados internos da empresa em ferramentas de Inteligência Artificial externas (ChatGPT, Gemini, Copilot e similares), salvo ferramentas aprovadas pela TI e acessadas com a conta corporativa.</b></li>
+        <li>Todo resultado gerado por IA deve ser conferido antes de ser usado ou divulgado.</li>
+        <li>Informações sobre colaboradores não podem ser divulgadas em grupos, murais ou redes sociais.</li>
+        <li>O descumprimento deste termo sujeita o(a) colaborador(a) a advertência, suspensão ou demissão por justa causa (CLT, art. 482), sem prejuízo das responsabilidades civis e criminais cabíveis.</li>
+        <li>A empresa pode monitorar o uso dos sistemas e arquivos para fins de segurança.</li>
+      </ol>
+    </div>
+
+    <div class="aceite">
+      <input id="ok" type="checkbox">
+      <label for="ok" style="margin:0;font-weight:400">Li e aceito o Termo de Uso e a Política de Segurança da Informação e Uso de IA da Construtora Vila Nova.</label>
+    </div>
+
+    <button id="baixar" disabled>Baixar planilha</button>
+
+    <div class="comprovante" id="comp">
+      <div>✅ <b>Acesso liberado.</b> O download começou. Se não começar, <a href="dados_ponto_outubro.xlsx" download>clique aqui</a>.</div>
+      <div style="margin-top:8px">Comprovante de aceite: <b id="quem"></b> em <b id="quando"></b>.</div>
+      <div style="margin-top:8px;font-size:13px;color:#5B6B8C">Guarde este comprovante (tire um print).</div>
+    </div>
+  </div>
+  <footer>Construtora Vila Nova · Portal do Colaborador · uso interno</footer>
+</main>
+<script>
+  const nome = document.getElementById("nome"), ok = document.getElementById("ok"), btn = document.getElementById("baixar");
+  const libera = () => { btn.disabled = !(ok.checked && nome.value.trim().length >= 3); };
+  nome.addEventListener("input", libera); ok.addEventListener("change", libera);
+  btn.addEventListener("click", () => {
+    const agora = new Date();
+    document.getElementById("quem").textContent = nome.value.trim();
+    document.getElementById("quando").textContent =
+      agora.toLocaleDateString("pt-BR") + " às " + agora.toLocaleTimeString("pt-BR", {hour: "2-digit", minute: "2-digit"});
+    document.getElementById("comp").style.display = "block";
+    nome.disabled = true; ok.disabled = true; btn.disabled = true;
+    const a = document.createElement("a"); a.href = "dados_ponto_outubro.xlsx"; a.download = ""; document.body.appendChild(a); a.click(); a.remove();
+  });
+</script>
+</body>
+</html>
