@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kit do Analista Seguro · Construtora Vila Nova</title>
+<style>
+  :root{--azul:#0B4FA8;--azul-esc:#08397a;--laranja:#F28C28;--tinta:#1F2A44;--cinza:#5B6B8C;--fundo:#F4F6FA;--borda:#D8DEEA;--verde:#1E7A3C;--verdeBg:#EAF7EE;--amar:#8A6200;--amarBg:#FFF8E1;--verm:#B3121F;--vermBg:#FFE5E7}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--fundo);color:var(--tinta)}
+  header{background:var(--azul);color:#fff;padding:14px 24px;display:flex;align-items:center;gap:14px}
+  .logo{width:40px;height:40px;border-radius:8px;background:var(--laranja);display:grid;place-items:center;font-weight:800;font-size:18px}
+  header b{font-size:18px} header small{display:block;opacity:.85;font-size:13px}
+  main{max-width:880px;margin:24px auto;padding:0 16px}
+  .card{background:#fff;border:1px solid var(--borda);border-radius:12px;padding:22px 24px;margin-bottom:18px}
+  h1{font-size:22px;margin:0 0 8px} h2{font-size:18px;margin:0 0 12px}
+  .email{background:#EEF4FD;border-color:#BFD6F6}
+  .email .de{font-size:13px;color:var(--cinza);margin-bottom:8px}
+  .arquivos{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .arq{display:flex;gap:12px;align-items:center;border:1px solid var(--borda);border-radius:10px;padding:14px;text-decoration:none;color:var(--tinta)}
+  .arq:hover{border-color:var(--azul);background:#F7FAFF}
+  .arq .ic{width:42px;height:42px;border-radius:8px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:13px;flex:none}
+  .arq small{display:block;color:var(--cinza)}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th{background:var(--tinta);color:#fff;text-align:left;padding:8px 10px}
+  td{border-bottom:1px solid var(--borda);padding:8px 10px;vertical-align:top}
+  .tag{font-size:12px;border-radius:999px;padding:2px 8px;background:var(--vermBg);color:var(--verm);font-weight:700}
+  .jogo{display:grid;gap:10px}
+  .carta{border:1px solid var(--borda);border-radius:10px;padding:12px 14px}
+  .carta p{margin:0 0 8px;font-weight:600}
+  .ops button{border:1px solid var(--borda);background:#fff;border-radius:8px;padding:7px 12px;font-size:14px;cursor:pointer;margin:0 6px 6px 0}
+  .ops button:hover{border-color:var(--azul)}
+  .fb{display:none;font-size:14px;border-radius:8px;padding:8px 10px;margin-top:4px}
+  .fb.ok{display:block;background:var(--verdeBg);color:var(--verde)} .fb.no{display:block;background:var(--vermBg);color:var(--verm)}
+  .placar{font-weight:800;color:var(--azul);font-size:18px;margin-top:10px}
+  pre{white-space:pre-wrap;background:#FFF7EC;border:1px solid #F5D3A8;border-radius:8px;padding:14px;font-size:13px;margin:0 0 10px}
+  .btn{background:var(--azul);color:#fff;border:0;border-radius:8px;padding:10px 18px;font-size:15px;font-weight:600;cursor:pointer}
+  .btn:hover{background:var(--azul-esc)}
+  .check label{display:flex;gap:10px;align-items:flex-start;margin:8px 0;font-size:15px}
+  .check input{width:18px;height:18px;margin-top:2px}
+  .sinal{margin-top:12px;border-radius:10px;padding:12px 14px;font-weight:700}
+  ol.passos li{margin:6px 0}
+  footer{text-align:center;color:var(--cinza);font-size:12px;margin:20px 0}
+  @media(max-width:640px){.arquivos{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="logo">VN</div><div><b>Construtora Vila Nova</b><small>Kit do Analista Seguro · RH</small></div></header>
+<main>
+  <div class="card email">
+    <div class="de"><b>De:</b> Marta (Gestora de RH) · <b>Assunto:</b> Relatório de outubro: agora do jeito certo</div>
+    <h1>Vamos tentar de novo?</h1>
+    <p>Depois da auditoria, a diretoria <b>ainda precisa do relatório</b>. Desta vez <b>eu não vou mandar os dados</b>: eles não saem daqui.</p>
+    <p>Mando só a <b>estrutura</b> da planilha. Vocês criam uma <b>ferramenta</b> (planilha modelo ou caderno do Colab), testam com <b>dados inventados</b> e me mandam com um <b>manual de 3 passos</b>. Eu rodo aqui dentro, com os dados reais.</p>
+    <p style="margin-bottom:0">O relatório precisa mostrar: <b>atraso e horas extras por setor</b>, <b>custo das horas extras</b> (horas × valor da hora × 1,5) e <b>1 gráfico por setor, sem nomes</b>.</p>
+  </div>
+
+  <div class="card">
+    <h2>📁 Arquivos desta etapa</h2>
+    <div class="arquivos">
+      <a class="arq" href="estrutura_ponto_SEM_DADOS.xlsx" download><span class="ic" style="background:#1E7A3C">XLSX</span><span><b>estrutura_ponto_SEM_DADOS.xlsx</b><small>Só o cabeçalho + aba Dicionário. Nenhum dado.</small></span></a>
+      <a class="arq" href="Folha3_Refazendo_do_jeito_certo.pdf" download><span class="ic" style="background:#B3121F">PDF</span><span><b>Folha 3: Refazendo do jeito certo</b><small>Passo a passo, checklist e entrega</small></span></a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📋 Dicionário de dados</h2>
+    <table>
+      <tr><th>Coluna</th><th>Tipo</th><th>Atenção</th></tr>
+      <tr><td>Matricula</td><td>texto (F001...)</td><td>Ligada a uma pessoa <span class="tag">dado pessoal</span></td></tr>
+      <tr><td>Nome</td><td>texto</td><td>Nunca na IA, nunca no gráfico <span class="tag">dado pessoal</span></td></tr>
+      <tr><td>Setor</td><td>texto</td><td>Elétrica, Hidráulica, Carpintaria, Canteiro, Drywall, Manutenção</td></tr>
+      <tr><td>Data</td><td>data</td><td>Dias úteis de outubro</td></tr>
+      <tr><td>Minutos_atraso</td><td>número</td><td>Minutos de atraso no dia</td></tr>
+      <tr><td>Horas_extras</td><td>número</td><td>Horas extras no dia</td></tr>
+      <tr><td>Salario_hora</td><td>número (R$)</td><td>Só para o custo, dentro da empresa <span class="tag">dado pessoal</span></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>🚦 Jogo: posso mandar isto para a IA?</h2>
+    <p style="margin-top:0;color:var(--cinza)">Para cada situação, escolha: <b>🟢 Pode</b> · <b>🟡 Só anonimizado e em ferramenta aprovada</b> · <b>🔴 Nunca</b></p>
+    <div class="jogo" id="jogo"></div>
+    <div class="placar" id="placar">Acertos: 0 de 8</div>
+  </div>
+
+  <div class="card">
+    <h2>📎 Prompt seguro: gerar dados fictícios</h2>
+    <pre id="prompt">Você é um analista de dados de uma construtora. Crie uma tabela FICTÍCIA com 30 linhas para eu testar uma planilha.
+Contexto: colunas Matricula (F001 a F010), Nome (nomes inventados), Setor (Elétrica, Hidráulica, Carpintaria, Canteiro, Drywall, Manutenção), Data (dias úteis de outubro de 2026), Minutos_atraso (0 a 90), Horas_extras (0 a 4), Salario_hora (24 a 32).
+Intenção: testar um relatório de atrasos e horas extras por setor, sem usar dados reais.
+Formato: tabela que eu possa copiar para o Google Planilhas, sem explicações.</pre>
+    <button class="btn" id="copiar">Copiar prompt</button>
+  </div>
+
+  <div class="card">
+    <h2>✅ Antes de mandar QUALQUER coisa para a IA</h2>
+    <div class="check">
+      <label><input type="checkbox" class="ck" data-bad="1"> Tem nome, CPF, salário, telefone, foto ou matrícula de alguém</label>
+      <label><input type="checkbox" class="ck" data-bad="1"> Tem dado interno da empresa (preço, contrato, cliente, relatório)</label>
+      <label><input type="checkbox" class="ck" data-bad="1"> Vou usar conta pessoal ou ferramenta não aprovada pela TI</label>
+      <label><input type="checkbox" class="ck" data-bad="0"> Estou usando só a estrutura ou dados fictícios</label>
+      <label><input type="checkbox" class="ck" data-bad="0"> Vou conferir o resultado antes de entregar</label>
+    </div>
+    <div class="sinal" id="sinal" style="background:#F4F6FA;color:var(--cinza)">Marque o que vale para o que você vai enviar.</div>
+  </div>
+
+  <div class="card">
+    <h2>🛠️ O que entregar para a Marta</h2>
+    <ol class="passos">
+      <li><b>Apague</b> o dados_ponto_outubro.xlsx da etapa anterior (computador, Drive, celular, chat da IA e grupo).</li>
+      <li><b>Crie dados fictícios</b> com o prompt seguro e cole na aba <b>Dados</b> da estrutura.</li>
+      <li><b>Monte a ferramenta</b>: planilha modelo (SOMASE, tabela dinâmica, gráfico) ou caderno do Colab (função como a <b>relatorio</b> da Aula 05).</li>
+      <li><b>Teste</b> e confira 2 números na mão.</li>
+      <li><b>Escreva o manual</b> de 3 passos e entregue no Sala de Aula: o link da ferramenta + o manual.</li>
+    </ol>
+  </div>
+  <footer>Construtora Vila Nova · Kit do Analista Seguro · uso interno</footer>
+</main>
+<script>
+  const cartas = [
+    ["A planilha do ponto completa, com nomes e valor da hora", "r", "Dado pessoal de 12 pessoas. Nunca vai para IA externa."],
+    ["Só o cabeçalho da planilha (os nomes das colunas)", "g", "Estrutura não identifica ninguém. Pode."],
+    ["30 linhas de dados que a própria IA inventou", "g", "Dado fictício: ninguém real envolvido. Pode."],
+    ["A média de atraso por setor, sem nomes", "y", "Agregado, mas ainda é informação interna: só em ferramenta aprovada."],
+    ["A planilha trocando os nomes por F001, F002...", "y", "Matrícula ainda liga à pessoa (pseudonimização): só em ferramenta aprovada pela TI."],
+    ["Print do gráfico com o nome de quem mais atrasou", "r", "Expõe colegas. Nunca na IA, nunca no grupo."],
+    ["A pergunta: \"como faço uma tabela dinâmica por setor?\"", "g", "Pergunta de como fazer, sem dados. Pode."],
+    ["O contrato da obra com o valor fechado com o cliente", "r", "Dado interno e sigiloso da empresa. Nunca."],
+  ];
+  const rot = { g: "🟢 Pode", y: "🟡 Só anonimizado", r: "🔴 Nunca" };
+  const jogo = document.getElementById("jogo"); let acertos = 0;
+  cartas.forEach(([txt, certo, pq]) => {
+    const div = document.createElement("div"); div.className = "carta";
+    div.innerHTML = `<p>${txt}</p><div class="ops"></div><div class="fb"></div>`;
+    const ops = div.querySelector(".ops"), fb = div.querySelector(".fb");
+    ["g", "y", "r"].forEach(k => {
+      const b = document.createElement("button"); b.textContent = rot[k];
+      b.onclick = () => {
+        ops.querySelectorAll("button").forEach(x => x.disabled = true);
+        if (k === certo) { acertos++; fb.className = "fb ok"; fb.textContent = "✔ Certo! " + pq; }
+        else { fb.className = "fb no"; fb.textContent = "✘ Resposta: " + rot[certo] + ". " + pq; }
+        document.getElementById("placar").textContent = "Acertos: " + acertos + " de " + cartas.length;
+      };
+      ops.appendChild(b);
+    });
+    jogo.appendChild(div);
+  });
+  document.getElementById("copiar").onclick = async (e) => {
+    const t = document.getElementById("prompt").textContent;
+    try { await navigator.clipboard.writeText(t); e.target.textContent = "Copiado ✔"; }
+    catch { const r = document.createRange(); r.selectNodeContents(document.getElementById("prompt")); getSelection().removeAllRanges(); getSelection().addRange(r); e.target.textContent = "Selecionado: aperte Ctrl + C"; }
+  };
+  const cks = document.querySelectorAll(".ck"), sinal = document.getElementById("sinal");
+  cks.forEach(c => c.onchange = () => {
+    const ruim = [...cks].some(x => x.checked && x.dataset.bad === "1");
+    const bom = [...cks].filter(x => x.checked && x.dataset.bad === "0").length;
+    if (ruim) { sinal.style.background = "var(--vermBg)"; sinal.style.color = "var(--verm)"; sinal.textContent = "🔴 PARE. Não envie. Use dados fictícios ou anonimize, e só em ferramenta aprovada."; }
+    else if (bom === 2) { sinal.style.background = "var(--verdeBg)"; sinal.style.color = "var(--verde)"; sinal.textContent = "🟢 Pode enviar. E confira o resultado antes de entregar."; }
+    else { sinal.style.background = "#F4F6FA"; sinal.style.color = "var(--cinza)"; sinal.textContent = "Marque o que vale para o que você vai enviar."; }
+  });
+</script>
+</body>
+</html>
