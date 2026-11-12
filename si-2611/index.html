@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Segurança da Informação · Construtora Vila Nova</title>
+<style>
+  :root{--verm:#B3121F;--verm-esc:#8A0D17;--tinta:#1F2A44;--cinza:#5B6B8C;--fundo:#F6F4F4;--borda:#E3D6D7;--azul:#0B4FA8}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--fundo);color:var(--tinta)}
+  header{background:var(--verm);color:#fff;padding:14px 24px;display:flex;align-items:center;gap:14px}
+  .logo{width:40px;height:40px;border-radius:8px;background:#fff;color:var(--verm);display:grid;place-items:center;font-weight:800;font-size:20px}
+  header b{font-size:18px} header small{display:block;opacity:.9;font-size:13px}
+  main{max-width:860px;margin:24px auto;padding:0 16px}
+  .card{background:#fff;border:1px solid var(--borda);border-radius:12px;padding:22px 24px;margin-bottom:18px}
+  .alerta{border-left:0;background:#FFF1F1;border-color:#F3C2C5}
+  .alerta h1{color:var(--verm);font-size:24px;margin:0 0 8px}
+  h2{font-size:18px;margin:0 0 12px}
+  .item6{background:#FFF8E1;border:1px solid #F2D27A;border-radius:8px;padding:12px 14px;font-weight:600}
+  .pill{display:inline-block;background:#fff;border:1px solid #F3C2C5;color:var(--verm);border-radius:999px;padding:3px 10px;font-size:13px;margin:4px 6px 0 0}
+  input[type=text]{width:100%;padding:10px 12px;border:1px solid var(--borda);border-radius:8px;font-size:15px}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th{background:var(--tinta);color:#fff;text-align:left;padding:8px 10px}
+  td{border-bottom:1px solid var(--borda);padding:9px 10px;vertical-align:top}
+  td.c{text-align:center} td input{width:18px;height:18px}
+  .medida{margin-top:16px;border-radius:10px;padding:16px;text-align:center;font-size:22px;font-weight:800;border:2px solid var(--borda);background:#F4F6FA;color:var(--cinza)}
+  .medida small{display:block;font-size:13px;font-weight:400;color:var(--cinza);margin-top:4px}
+  .n0{background:#EAF7EE;border-color:#9CD3AE;color:#1E7A3C}
+  .n1,.n2{background:#FFF8E1;border-color:#F2D27A;color:#8A6200}
+  .n3{background:#FFEBDD;border-color:#F5B184;color:#A04500}
+  .n4{background:#FFE5E7;border-color:#F09AA1;color:var(--verm)}
+  details{margin-top:6px} summary{cursor:pointer;font-weight:700;color:var(--verm)}
+  .cases td:first-child{width:28%;font-weight:600}
+  button{background:var(--verm);color:#fff;border:0;border-radius:8px;padding:10px 18px;font-size:15px;font-weight:600;cursor:pointer}
+  button.sec{background:#fff;color:var(--verm);border:1px solid var(--verm)}
+  footer{text-align:center;color:var(--cinza);font-size:12px;margin:20px 0}
+  @media print{button,details summary{display:none} details{display:block} body{background:#fff}}
+</style>
+</head>
+<body>
+<header><div class="logo">!</div><div><b>Segurança da Informação</b><small>Construtora Vila Nova · comunicado interno</small></div></header>
+<main>
+  <div class="card alerta">
+    <h1>⚠ Incidente de segurança detectado</h1>
+    <p>Na manhã de hoje, o monitoramento identificou que o arquivo <b>dados_ponto_outubro.xlsx</b>, com <b>nomes e valor da hora de 12 colaboradores</b>, saiu do ambiente da empresa.</p>
+    <span class="pill">Ferramentas de IA externas</span><span class="pill">Contas pessoais</span><span class="pill">Grupos de mensagens</span><span class="pill">Dispositivos pessoais</span>
+    <p style="margin-top:14px">Foi aberta uma <b>auditoria</b>. Cada equipe vai apresentar o seu <b>Registro do trabalho</b>.</p>
+  </div>
+
+  <div class="card">
+    <h2>O termo que todos aceitaram para baixar o arquivo</h2>
+    <p>"Li e aceito o Termo de Uso e a Política de Segurança da Informação e Uso de IA." Item 6 do termo:</p>
+    <div class="item6">É proibido inserir dados pessoais (nome, CPF, salário, matrícula) ou dados internos da empresa em ferramentas de Inteligência Artificial externas (ChatGPT, Gemini, Copilot e similares), salvo ferramentas aprovadas pela TI e acessadas com a conta corporativa.</div>
+    <p style="font-size:14px;color:var(--cinza)">Itens 4, 5, 7 e 8: não compartilhar por mensagens ou nuvem pessoal, não salvar em dispositivo pessoal, conferir todo resultado de IA e não divulgar informações de colaboradores em grupos.</p>
+  </div>
+
+  <div class="card">
+    <h2>Auditoria da equipe</h2>
+    <label for="eq"><b>Equipe</b></label>
+    <input id="eq" type="text" placeholder="Nome ou número da equipe">
+    <p style="font-size:14px;color:var(--cinza)">Marque, com base no Registro do trabalho, o que a equipe fez:</p>
+    <table>
+      <tr><th>Conduta</th><th style="width:90px">Fizemos?</th><th style="width:170px">Medida prevista</th></tr>
+      <tr><td>Colamos ou enviamos a planilha com nomes e valor da hora para uma IA</td><td class="c"><input type="checkbox" data-n="4"></td><td>Justa causa</td></tr>
+      <tr><td>Usamos IA com conta pessoal (não aprovada pela TI)</td><td class="c"><input type="checkbox" data-n="3"></td><td>Suspensão</td></tr>
+      <tr><td>Mandamos resultado com nomes no grupo de mensagens</td><td class="c"><input type="checkbox" data-n="3"></td><td>Suspensão</td></tr>
+      <tr><td>Salvamos a planilha no celular, pen drive ou Drive pessoal</td><td class="c"><input type="checkbox" data-n="2"></td><td>Advertência escrita</td></tr>
+      <tr><td>Não conferimos os números que a IA deu</td><td class="c"><input type="checkbox" data-n="1"></td><td>Advertência verbal</td></tr>
+      <tr><td>Aceitamos o termo sem ler</td><td class="c"><input type="checkbox" data-n="1"></td><td>Advertência verbal</td></tr>
+    </table>
+    <div id="medida" class="medida n0">Nenhuma infração marcada<small>Marque as condutas para ver a medida</small></div>
+    <p style="font-size:13px;color:var(--cinza);margin-top:10px">A medida é a mais grave marcada. Na vida real, a empresa avalia gravidade, intenção e histórico.</p>
+    <button onclick="window.print()">Imprimir / salvar comprovante</button>
+    <button class="sec" onclick="limpar()">Próxima equipe</button>
+  </div>
+
+  <div class="card">
+    <h2>E se for quebrado? Consequências de verdade</h2>
+    <details><summary>Para a empresa</summary>
+      <table class="cases">
+        <tr><td>LGPD, art. 52</td><td>Advertência, multa de até 2% do faturamento (limite de R$ 50 milhões por infração), multa diária, publicização, bloqueio ou eliminação dos dados, suspensão do tratamento.</td></tr>
+        <tr><td>Brasil, 2026</td><td>A ANPD multou o TikTok em R$ 153,7 milhões (ago/2026, cabe recurso) por tratar dados de crianças sem base legal.</td></tr>
+        <tr><td>Mundo, 2025</td><td>IBM: 1 em cada 5 vazamentos envolveu IA não autorizada (shadow AI); 97% das empresas atingidas não tinham controle de acesso à IA.</td></tr>
+      </table></details>
+    <details><summary>Para o funcionário</summary>
+      <table class="cases">
+        <tr><td>Na empresa</td><td>Advertência verbal → advertência escrita → suspensão (até 30 dias, CLT art. 474) → justa causa (CLT art. 482). Falta grave pode ir direto para a justa causa.</td></tr>
+        <tr><td>Caso real, SP 2025</td><td>A Justiça do Trabalho manteve a justa causa de uma assistente que enviou por engano dados de 350 colegas (salário, FGTS, PIS).</td></tr>
+        <tr><td>Caso real, Samsung 2023</td><td>Funcionários colaram código secreto no ChatGPT. A empresa proibiu IA nos aparelhos e avisou que quem violar pode ser demitido.</td></tr>
+        <tr><td>No bolso</td><td>A empresa pode cobrar o prejuízo (Código Civil, art. 927).</td></tr>
+      </table></details>
+    <details><summary>Pode ser preso?</summary>
+      <p>A LGPD não prevê prisão: as punições dela são para a empresa. Mas divulgar <b>de propósito</b> informação sigilosa pode ser crime: Lei 9.279/96, art. 195, e Código Penal, art. 154, com detenção de 3 meses a 1 ano ou multa. Sem intenção, o risco real é a justa causa e ter que indenizar.</p>
+      <p style="font-size:13px;color:var(--cinza)">Resumo para fins didáticos, não é orientação jurídica.</p></details>
+  </div>
+  <footer>Construtora Vila Nova · Segurança da Informação · uso interno</footer>
+</main>
+<script>
+  const nomes = ["Nenhuma infração marcada", "Advertência verbal", "Advertência por escrito", "Suspensão", "Demissão por justa causa"];
+  const caixas = document.querySelectorAll("input[type=checkbox]"), box = document.getElementById("medida");
+  function calc() {
+    let n = 0; caixas.forEach(c => { if (c.checked) n = Math.max(n, +c.dataset.n); });
+    const eq = document.getElementById("eq").value.trim();
+    box.className = "medida n" + n;
+    box.innerHTML = nomes[n] + "<small>" + (eq ? "Equipe: " + eq.replace(/[<>&]/g, "") : "Medida da equipe") + "</small>";
+  }
+  function limpar() { caixas.forEach(c => c.checked = false); document.getElementById("eq").value = ""; calc(); window.scrollTo(0, 0); }
+  caixas.forEach(c => c.addEventListener("change", calc)); document.getElementById("eq").addEventListener("input", calc);
+</script>
+</body>
+</html>
